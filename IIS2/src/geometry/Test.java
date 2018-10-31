@@ -11,7 +11,7 @@ public class Test {
 		
 		System.out.println("X coordinate of point p is: " + p.getX() + '\n' +
 				"Y coordinate of point p is: " + p.getY() + '\n' +
-				"Point p is selected: " + p.getSelected());
+				"Point p is selected: " + p.isSelected());
 
 		double result = p.distance(56, 87);
 		System.out.println("Distance between points is: " + result);
