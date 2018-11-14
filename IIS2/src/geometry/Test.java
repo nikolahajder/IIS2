@@ -127,6 +127,22 @@ public class Test {
 			}
 		}
 		
+		Donut d = new Donut(new Point(20, 20), 10, 7);
+		System.out.println(d.toString());
+		System.out.println(d);
+		
+		Donut d1 = new Donut(p2, 8, 5);
+		System.out.println(d.equals(d1));
+		System.out.println(d == d1);
+		
+		d = d1;
+		
+		System.out.println(d instanceof Donut);
+		System.out.println(d instanceof Object);
+		System.out.println(d instanceof Circle);
+		
+		System.out.println(c1 instanceof Donut);
+		
 	}
 
 }

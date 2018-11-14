@@ -20,6 +20,14 @@ public class Line {
 		setSelected(selected);
 	}
 	
+	public boolean contains(int x, int y) {
+		if ((startPoint.distance(x, y) + endPoint.distance(x, y)) - length() <= 0.05) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public boolean equals(Object obj) {
 		if (obj instanceof Line) {
 			Line l = (Line) obj;

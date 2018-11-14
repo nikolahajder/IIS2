@@ -21,6 +21,10 @@ public class Point {
 		// setSelected(selected);
 	}
 	
+	public boolean contains(int x, int y) {
+		return this.distance(x, y) <= 3;
+	}
+	
 	public boolean equals(Object obj) {
 		if (obj instanceof Point) {
 			Point p = (Point) obj;
