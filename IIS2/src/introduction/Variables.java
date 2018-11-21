@@ -73,6 +73,11 @@ public class Variables {
 			System.out.println("Number " + i + " is odd.");
 		}
 		
+		System.out.println(cube(5));
+	}
+	
+	public static int cube(int x) {
+		return x*x*x;
 	}
 
 }
