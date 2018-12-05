@@ -1,6 +1,7 @@
 package geometry;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class Test {
 
@@ -172,6 +173,34 @@ public class Test {
 		for (int i = 0; i < arrayOfPoints.length; i++) {
 			System.out.println(arrayOfPoints[i]);
 		}
+		
+		// dinamicko povezivanje
+		Circle c1 = new Donut(p2, 66, 22);
+		
+		Rectangle r = new Rectangle(p3, 10, 5);
+		
+		HashMap<String, Shape> map = new HashMap<String, Shape>();
+		map.put("point", p1);
+		map.put("rectangle", r);
+		map.put("Point", p3);
+		System.out.println("point from map is " + map.get("point"));
+		System.out.println("point from map is " + map.get("Point"));
+		
+		map.put("point", p4);
+		System.out.println("****");
+		System.out.println("point from map is " + map.get("point"));
+		
+		Circle c2 = new Circle(p2, 10);
+		
+		try {
+			c2.setRadius(-50);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			System.out.println("Ja se uvek izvrsavam!");
+		}
+		
 	}
 
 }
