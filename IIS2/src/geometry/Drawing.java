@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Drawing extends JPanel {
+	public Drawing() {
+	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Drawing");
@@ -20,10 +22,10 @@ public class Drawing extends JPanel {
 	public void paint(Graphics g) {
 		
 		Point p = new Point(150, 150, true);
-		//p.draw(g);
+		p.draw(g);
 		
 		Line l = new Line(new Point(200, 350), new Point(400, 300), true);
-		//l.draw(g);
+		l.draw(g);
 		
 		Rectangle r = new Rectangle(new Point(450, 80), 60, 120, true);
 		//r.draw(g);
@@ -31,7 +33,7 @@ public class Drawing extends JPanel {
 		Circle c = new Circle(new Point(500, 450), 50, true);
 		//c.draw(g);
 		
-		Donut d = new Donut(new Point(600, 350), 80, 50, false);
+		Donut d = new Donut(new Point(600, 350), 80, 50, true);
 		//d.draw(g);
 		
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -56,7 +58,7 @@ public class Drawing extends JPanel {
 		
 		// dodati i iscrtati liniju u listu tako da ona bude na 4. poziciji u listi
 		shapes.add(3, new Line(new Point(150, 150), new Point(300, 300)));
-		shapes.get(3).draw(g);
+		//shapes.get(3).draw(g);
 		
 		// ukloniti drugi element liste
 		shapes.remove(1);
