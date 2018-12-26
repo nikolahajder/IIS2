@@ -135,7 +135,7 @@ public class DlgStudent extends JDialog {
 				btnPotvrdi.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						isOk = true;
-						setVisible(false);
+						dispose();
 					}
 				});
 				btnPotvrdi.setActionCommand("OK");

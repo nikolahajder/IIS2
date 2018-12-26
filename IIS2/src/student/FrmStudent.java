@@ -73,14 +73,14 @@ public class FrmStudent extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Modifikuj");
+		JButton btnModifikuj = new JButton("Modifikuj");
 		GroupLayout gl_pnlZapad = new GroupLayout(pnlZapad);
 		gl_pnlZapad.setHorizontalGroup(
 			gl_pnlZapad.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlZapad.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlZapad.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+						.addComponent(btnModifikuj, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
 						.addComponent(btnDodaj, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -90,7 +90,7 @@ public class FrmStudent extends JFrame {
 					.addContainerGap()
 					.addComponent(btnDodaj)
 					.addGap(18)
-					.addComponent(btnNewButton_1)
+					.addComponent(btnModifikuj)
 					.addContainerGap(146, Short.MAX_VALUE))
 		);
 		pnlZapad.setLayout(gl_pnlZapad);
