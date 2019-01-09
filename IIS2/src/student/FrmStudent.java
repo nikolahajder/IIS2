@@ -49,6 +49,7 @@ public class FrmStudent extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmStudent() {
+		setTitle("Evidencija studenata");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -176,11 +177,6 @@ public class FrmStudent extends JFrame {
 		txtBrojStudenata.setEditable(false);
 		pnlJug.add(txtBrojStudenata);
 		txtBrojStudenata.setColumns(2);
-		
-		JLabel lblEvidencijaStudenata = new JLabel("Evidencija studenata");
-		lblEvidencijaStudenata.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEvidencijaStudenata.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		contentPane.add(lblEvidencijaStudenata, BorderLayout.NORTH);
 	}
 }
 
