@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -17,6 +19,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class DlgStudent extends JDialog {
 
@@ -73,6 +77,18 @@ public class DlgStudent extends JDialog {
 		cbxSmer.addItem("MH");
 		
 		txtBrojIndeksa = new JTextField();
+		txtBrojIndeksa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				if (!((c >= '0') && (c<= '9') ||
+						(c == KeyEvent.VK_BACK_SPACE) ||
+						(c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		txtBrojIndeksa.setColumns(10);
 		
 		JLabel lblC = new JLabel("/");
@@ -134,8 +150,20 @@ public class DlgStudent extends JDialog {
 				btnPotvrdi = new JButton("Potvrdi");
 				btnPotvrdi.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						isOk = true;
-						dispose();
+						if (txtIme.getText().isEmpty() ||
+								txtPrezime.getText().isEmpty() ||
+								txtBrojIndeksa.getText().isEmpty()) {
+							isOk = false;
+							setVisible(true);
+							JOptionPane.showMessageDialog(null,
+									"Sva polja moraju biti popunjena!", 
+									"Greška",
+									JOptionPane.WARNING_MESSAGE);
+						} else {
+							isOk = true;
+							dispose();
+						}
+						
 					}
 				});
 				btnPotvrdi.setActionCommand("OK");

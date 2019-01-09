@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -25,6 +26,7 @@ public class FrmStudent extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtBrojStudenata;
 	DefaultListModel dlm = new DefaultListModel();
+	JList lstStudent = new JList();
 	int brojac = 0;
 	
 	/**
@@ -62,18 +64,45 @@ public class FrmStudent extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DlgStudent dlgStudent = new DlgStudent();
 				dlgStudent.setVisible(true);
-				if (dlgStudent.isOk) {
-					dlm.addElement("Broj indeksa: " + dlgStudent.getCbxSmer().getSelectedItem() + " "
-							+ dlgStudent.getTxtBrojIndeksa().getText() + " / "
-							+ dlgStudent.getCbxGodina().getSelectedItem() + ", Prezime "
-							+ dlgStudent.getTxtPrezime().getText() + " Ime " + dlgStudent.getTxtIme().getText());
-					brojac++;
-					txtBrojStudenata.setText(Integer.toString(brojac));
+				dlm.addElement("Broj indeksa: " + dlgStudent.getCbxSmer().getSelectedItem() +
+						" " + dlgStudent.getTxtBrojIndeksa().getText() + " / " + 
+						dlgStudent.getCbxGodina().getSelectedItem() + ", Prezime: " +
+						dlgStudent.getTxtPrezime().getText() + " Ime: " + dlgStudent.getTxtIme().getText());
+				brojac++;
+				txtBrojStudenata.setText(Integer.toString(brojac));
 				}
-			}
-		});
+			});
 		
 		JButton btnModifikuj = new JButton("Modifikuj");
+		btnModifikuj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (lstStudent.isSelectionEmpty()) {
+					JOptionPane.showMessageDialog(pnlZapad,
+							"Nijedan red nije selektovan!",
+							"Greška",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					DlgStudent dlgModifikacija = new DlgStudent();
+					String[] split = dlm.getElementAt(lstStudent.getSelectedIndex()).toString().split(" ");
+					int index = lstStudent.getSelectedIndex();
+					dlgModifikacija.getTxtIme().setText(split[9]);
+					dlgModifikacija.getTxtPrezime().setText(split[7]);
+					dlgModifikacija.getTxtBrojIndeksa().setText(split[3]);
+					dlgModifikacija.getCbxSmer().setSelectedItem(split[2]);
+					dlgModifikacija.getCbxGodina().setSelectedItem( split[4]);
+					dlgModifikacija.setVisible(true);
+					
+					if (dlgModifikacija.isOk) {
+						dlm.removeElementAt(lstStudent.getSelectedIndex());
+						dlm.add(index, "Broj indeksa: " + dlgModifikacija.getCbxSmer().getSelectedItem() + " " + 
+										dlgModifikacija.getTxtBrojIndeksa().getText() + " / " + 
+										dlgModifikacija.getCbxGodina().getSelectedItem() + ", Prezime " + 
+										dlgModifikacija.getTxtPrezime().getText() + " ,Ime " + dlgModifikacija.getTxtIme().getText());
+					}
+				}
+				
+			}
+		});
 		GroupLayout gl_pnlZapad = new GroupLayout(pnlZapad);
 		gl_pnlZapad.setHorizontalGroup(
 			gl_pnlZapad.createParallelGroup(Alignment.LEADING)
@@ -104,18 +133,15 @@ public class FrmStudent extends JFrame {
 			gl_pnlCentar.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlCentar.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrlStudent, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(13, Short.MAX_VALUE))
+					.addComponent(scrlStudent, GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
 		);
 		gl_pnlCentar.setVerticalGroup(
 			gl_pnlCentar.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pnlCentar.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrlStudent, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(15, Short.MAX_VALUE))
+					.addComponent(scrlStudent, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))
 		);
 		
-		JList lstStudent = new JList();
 		lstStudent.setModel(dlm);
 		scrlStudent.setViewportView(lstStudent);
 		pnlCentar.setLayout(gl_pnlCentar);
@@ -124,6 +150,20 @@ public class FrmStudent extends JFrame {
 		contentPane.add(pnlIstok, BorderLayout.EAST);
 		
 		JButton btnUkloni = new JButton("Ukloni");
+		btnUkloni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!dlm.isEmpty()) {
+					dlm.remove(dlm.size() - 1);
+					brojac--;
+					txtBrojStudenata.setText(Integer.toString(brojac));
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Lista je prazna!", 
+							"Greška",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		pnlIstok.add(btnUkloni);
 		
 		JPanel pnlJug = new JPanel();
